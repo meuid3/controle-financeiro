@@ -34,9 +34,8 @@ export class CadastrarUsuarioService {
     ]
 
     for(let campo of camposObrigatorios) {
-      if(!usuario[campo]) {
+      if(!usuario[campo]) 
         throw new Error(`Campo ${campo} não informado!`)
-      }
     }
   }
 
@@ -45,9 +44,8 @@ export class CadastrarUsuarioService {
     if(usuarioBD) {
       const isEmailInvalido = usuarioBD.email === email
       
-      if(isEmailInvalido) {
+      if(isEmailInvalido) 
         throw new Error("E-mail informado não pode ser utilizado!")
-      }
     }
   }
     
