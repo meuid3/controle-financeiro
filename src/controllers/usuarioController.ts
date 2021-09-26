@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { CadastrarUsuarioUseCase } from '../usecases/cadastrarUsuario/CadastrarUsuarioUseCase'
 import { UsuarioRepository } from '../repositories/UsuarioRepository'
+import { CadastrarUsuarioUseCase } from '../usecases/cadastrarUsuario/CadastrarUsuarioUseCase'
 
 class UsuarioController {
 
@@ -8,12 +8,13 @@ class UsuarioController {
     try {
       const usuario = request.body
       const usuarioRepository = new UsuarioRepository()
-      const cadastrarUsuarioService = new CadastrarUsuarioUseCase(usuarioRepository)
-      const result = await cadastrarUsuarioService.handle(usuario)
-      response.json(result)
+      const cadastrarUsuarioUseCase = new CadastrarUsuarioUseCase(usuarioRepository)
+      const usuarioCadastrado = await cadastrarUsuarioUseCase.handle(usuario)
+      response.json(usuarioCadastrado)
     }
     catch(error) {
-      response.status(500).json(error)
+      const  msg = (error as Error).message;
+      response.json({message: msg})
     }
   }
 }
