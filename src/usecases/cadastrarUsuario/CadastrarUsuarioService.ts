@@ -1,5 +1,6 @@
 import { Usuario } from "../../entities/Usuario"
 import { UsuarioRequestDTO } from "./UsuarioRequestDTO"
+import { ErrorCampoObrigatorioNaoInformado } from "../../errors/CampoObrigatorioError"
 import { IUsuarioRepository } from "../../repositories/adapters/IUsuarioRepository"
 
 export class CadastrarUsuarioService {
@@ -11,7 +12,7 @@ export class CadastrarUsuarioService {
     this.verificaSenha(usuarioRequest)
 
     const {nome, email, senha} = usuarioRequest
-    await this.validaEmail(email)
+    await this.validaDisponibilidadeEmail(email)
 
     return await this.usuarioRepository.cadastrar({
       nome,
@@ -35,11 +36,11 @@ export class CadastrarUsuarioService {
 
     for(let campo of camposObrigatorios) {
       if(!usuario[campo]) 
-        throw new Error(`Campo ${campo} não informado!`)
+        ErrorCampoObrigatorioNaoInformado(campo)
     }
   }
 
-  private async validaEmail(email: string): Promise<void> {
+  private async validaDisponibilidadeEmail(email: string): Promise<void> {
     const usuarioBD = await this.usuarioRepository.buscarUsuarioPorEmail(email) 
     if(usuarioBD) {
       const isEmailInvalido = usuarioBD.email === email
