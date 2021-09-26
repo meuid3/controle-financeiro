@@ -14,7 +14,7 @@ class UsuarioController {
     }
     catch(error) {
       const  msg = (error as Error).message;
-      response.json({message: msg})
+      response.status(500).json({message: msg})
     }
   }
 }
