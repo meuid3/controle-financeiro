@@ -22,6 +22,10 @@ export class CadastrarUsuarioService {
   }
 
   private verificaSenha({senha, confirmarSenha}: UsuarioRequestDTO): void {
+
+    if(senha.length < 6)
+      throw new Error("A senha deve possuir no mínimo 6 caracteres")
+
     if(senha !== confirmarSenha)
       throw new Error("As senhas não conferem")
   }
