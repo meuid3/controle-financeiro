@@ -1,5 +1,4 @@
-import { Usuario } from "../../entities/Usuario"
-import { UsuarioRequestDTO } from "./UsuarioRequestDTO"
+import { UsuarioRequestDTO, UsuarioResponseDTO } from "./UsuarioDTO"
 import { ErrorCampoObrigatorioNaoInformado } from "../../errors/CampoObrigatorioError"
 import { IUsuarioRepository } from "../../repositories/adapters/IUsuarioRepository"
 
@@ -7,18 +6,28 @@ export class CadastrarUsuarioService {
   
   constructor(private usuarioRepository: IUsuarioRepository){}
 
-  public async handle(usuarioRequest: UsuarioRequestDTO): Promise<Usuario> {
+  public async handle(usuarioRequest: UsuarioRequestDTO): Promise<UsuarioResponseDTO> {
     this.verificaCamposObrigatorios(usuarioRequest)
     this.verificaSenha(usuarioRequest)
 
     const {nome, email, senha} = usuarioRequest
     await this.validaDisponibilidadeEmail(email)
 
-    return await this.usuarioRepository.cadastrar({
+    const usuarioCadastrado = await this.usuarioRepository.cadastrar({
       nome,
       email,
       senha
     })
+
+    if(usuarioCadastrado) {
+      return {
+        id: usuarioCadastrado.id,
+        nome: usuarioCadastrado.nome,
+        email: usuarioCadastrado.email
+      }
+    }
+
+    throw new Error("Erro ao cadastrar o novo Usuário")
   }
 
   private verificaSenha({senha, confirmarSenha}: UsuarioRequestDTO): void {
