@@ -5,3 +5,9 @@ export interface UsuarioRequestDTO {
   senha: string
   confirmarSenha: string
 }
+
+export interface UsuarioResponseDTO {
+  id?: number
+  nome: string
+  email: string
+}
