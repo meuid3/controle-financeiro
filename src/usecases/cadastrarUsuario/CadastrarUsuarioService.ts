@@ -2,7 +2,7 @@ import { Usuario } from "../../entities/Usuario"
 import { UsuarioRequestDTO } from "./UsuarioRequestDTO"
 import { IUsuarioRepository } from "../../repositories/adapters/IUsuarioRepository"
 
-export class CadastrarUsuarioUseCase {
+export class CadastrarUsuarioService {
   
   constructor(private usuarioRepository: IUsuarioRepository){}
 
