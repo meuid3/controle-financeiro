@@ -1,6 +1,7 @@
+import { hash } from 'bcryptjs'
 import { UsuarioRequestDTO, UsuarioResponseDTO } from "./UsuarioDTO"
-import { ErrorCampoObrigatorioNaoInformado } from "../../errors/CampoObrigatorioError"
 import { IUsuarioRepository } from "../../repositories/adapters/IUsuarioRepository"
+import { ErrorCampoObrigatorioNaoInformado } from "../../errors/CampoObrigatorioError"
 
 export class CadastrarUsuarioService {
   
@@ -13,10 +14,12 @@ export class CadastrarUsuarioService {
     const {nome, email, senha} = usuarioRequest
     await this.validaDisponibilidadeEmail(email)
 
+    const senhaCriptografada = await hash(senha,10)
+
     const usuarioCadastrado = await this.usuarioRepository.cadastrar({
       nome,
       email,
-      senha
+      senha: senhaCriptografada
     })
 
     if(usuarioCadastrado) {
