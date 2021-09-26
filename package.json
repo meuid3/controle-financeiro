@@ -10,7 +10,7 @@
   "author": "Marcos Moraes Pereira",
   "license": "ISC",
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
     "@types/node": "^16.9.6",
     "git-commit-msg-linter": "^3.2.8",
