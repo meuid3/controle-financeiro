@@ -8,7 +8,7 @@ export class UsuarioRepository implements IUsuarioRepository {
 
   async cadastrar(usuario: Usuario):Promise<Usuario>  {
 
-    const persist = await this.prisma.user.create({
+    const persist = await this.prisma.usuario.create({
       data: usuario
     })
     return persist
