@@ -7,7 +7,7 @@ export class CadastrarUsuarioService {
   
   constructor(private usuarioRepository: IUsuarioRepository){}
 
-  public async handle(usuarioRequest: UsuarioRequestDTO): Promise<UsuarioResponseDTO> {
+  public async executar(usuarioRequest: UsuarioRequestDTO): Promise<UsuarioResponseDTO> {
     this.verificaCamposObrigatorios(usuarioRequest)
     this.verificaSenha(usuarioRequest)
 

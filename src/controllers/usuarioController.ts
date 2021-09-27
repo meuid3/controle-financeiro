@@ -10,7 +10,7 @@ class UsuarioController {
       const usuario = request.body
       
       const cadastrarUsuarioService = new CadastrarUsuarioService(usuarioRepository())
-      const usuarioCadastrado = await cadastrarUsuarioService.handle(usuario)
+      const usuarioCadastrado = await cadastrarUsuarioService.executar(usuario)
       response.json(usuarioCadastrado)
     }
     catch(error) {
@@ -22,7 +22,7 @@ class UsuarioController {
   async listarUsuario(request: Request, response: Response) {
     try {
       const listarUsuarioService = new ListarUsuarioService(usuarioRepository())
-      const usuarios = await listarUsuarioService.handle()
+      const usuarios = await listarUsuarioService.executar()
       response.json(usuarios)
 
     } catch(error) {

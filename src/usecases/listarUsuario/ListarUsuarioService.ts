@@ -4,7 +4,7 @@ export class ListarUsuarioService {
   
   constructor(private usuarioRepository: IUsuarioRepository) {}
 
-  public async handle() {
+  public async executar() {
     return await this.usuarioRepository.listarUsuarios()
   }
 }
