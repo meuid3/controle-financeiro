@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { IUsuarioRepository } from "./adapters/IUsuarioRepository"
 
 export class UsuarioRepository implements IUsuarioRepository {
+
   private prisma = new PrismaClient()
 
   async cadastrar(usuario: Usuario):Promise<Usuario>  {
@@ -22,8 +23,15 @@ export class UsuarioRepository implements IUsuarioRepository {
     return usuario
   }
 
-  async listarUsuarios(): Promise <Usuario[]> {
-    const usuarios = await this.prisma.usuario.findMany()
+  async listarUsuarios(): Promise <any[]> {
+    const usuarios = await this.prisma.usuario.findMany({
+      select:{
+        id: true,
+        nome: true,
+        email: true
+      }
+    })
+  
     return usuarios
   }
 }
