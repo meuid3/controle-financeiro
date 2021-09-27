@@ -57,9 +57,9 @@ export class CadastrarUsuarioService {
   }
 
   private async validaDisponibilidadeEmail(email: string): Promise<void> {
-    const usuarioBD = await this.usuarioRepository.buscarUsuarioPorEmail(email) 
-    if(usuarioBD) {
-      const isEmailInvalido = usuarioBD.email === email
+    const usuario = await this.usuarioRepository.buscarUsuarioPorEmail(email) 
+    if(usuario) {
+      const isEmailInvalido = usuario.email === email
       
       if(isEmailInvalido) 
         throw new Error("E-mail informado não pode ser utilizado!")
