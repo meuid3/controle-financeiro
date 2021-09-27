@@ -21,4 +21,9 @@ export class UsuarioRepository implements IUsuarioRepository {
 
     return usuario
   }
+
+  async listarUsuarios(): Promise <Usuario[]> {
+    const usuarios = await this.prisma.usuario.findMany()
+    return usuarios
+  }
 }
