@@ -4,7 +4,7 @@ export class ListarUsuarioService {
   
   constructor(private usuarioRepository: IUsuarioRepository) {}
 
-  handle() {
+  public async handle() {
     throw new Error('Servico listar usuário criado')
   }
 }
