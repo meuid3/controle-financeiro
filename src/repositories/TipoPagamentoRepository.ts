@@ -14,8 +14,8 @@ export class TipoPagamentoRepository implements ITipoPagamentoRepository {
     return persist
   }
 
-  listarTiposPagamento(): Promise<TipoPagamento> {
-    throw new Error("Method not implemented.");
+  async listarTiposPagamento(): Promise<TipoPagamento[]> {
+    return await this.prisma.tipoPagamento.findMany()
   }
 
   ativarTipoPagamento(): Promise<TipoPagamento> {
