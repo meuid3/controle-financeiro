@@ -16,3 +16,31 @@ model Usuario {
   email   String   @unique
   senha   String
 }
+
+model TipoPagamento {
+  id         Int @id @default(autoincrement())
+  descricao  String
+  codigo     String
+  ativo      Boolean
+  despesa    Despesa?
+}
+
+model Categoria {
+  id        Int @id @default(autoincrement())
+  descricao String
+  ativo     Boolean
+  despesa   Despesa?
+}
+
+model Despesa {
+  id                  Int @id @default(autoincrement())
+  descricao           String
+  categoria           Categoria @relation(fields: [categoriaId], references: [id])
+  tipoPagamento       TipoPagamento @relation(fields: [tipoPagamentoId], references: [id])
+  valor               Decimal
+  parcelas            Int
+  dataCompora         DateTime
+  categoriaId         Int
+  tipoPagamentoId     Int
+}
+
