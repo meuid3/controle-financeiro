@@ -37,9 +37,9 @@ model Despesa {
   descricao           String
   categoria           Categoria @relation(fields: [categoriaId], references: [id])
   tipoPagamento       TipoPagamento @relation(fields: [tipoPagamentoId], references: [id])
-  valor               Decimal
+  valor               Float
   parcelas            Int
-  dataCompora         DateTime
+  dataCompra          DateTime
   categoriaId         Int
   tipoPagamentoId     Int
 }
