@@ -21,7 +21,7 @@ class DespesaController {
   public async listarDespesas(request: Request, response: Response) {
     try {
       const despesaService = new ListarDespesaService(despesaRepository())
-      const despesas = despesaService.executar()
+      const despesas = await despesaService.executar()
       response.json(despesas) 
 
     } catch(error) {
